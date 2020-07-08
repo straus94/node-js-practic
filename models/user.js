@@ -43,10 +43,32 @@ user.methods.addToCard = function (course) {
             count: 1
         })
     }
+  this.cart = {items}
 
-    this.cart = {items}
+  return this.save()
+}
 
-    return this.save()
+user.methods.removeFromCart = function (id) {
+  let items = [...this.cart.items];
+  const index = items.findIndex(item => item.courseId.toString() === id.toString());
+
+  if (items[index].count === 1) {
+    items = items.filter(item => item.courseId.toString() !== id.toString());
+  } else {
+    items[index].count--;
+  }
+
+  this.cart = {items};
+  return this.save();
+
+}
+
+user.methods.clearCart = function () {
+  const items = []
+
+  this.cart = {items}
+  return this.save()
+
 }
 
 module.exports = model('User', user)
