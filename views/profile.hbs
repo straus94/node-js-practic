@@ -1,0 +1,40 @@
+<h1>Profile</h1>
+
+
+
+{{#if user}}
+        <div class="row">
+            <div class="col s12">
+                <div class="card">
+                    <div class="card-content">
+                        <p><strong>User: </strong><em>{{user.name}}</em></p>
+                        <p><strong>Emai: </strong><em>{{user.email}}</em></p>
+                        <ul class="list">
+                           {{#each orders}}
+                               <li>
+                                   <p><strong>Order from:</strong> <span class="date">{{date}}</span></p>
+                                   <p><strong>Price:</strong> <span class="price">{{price}}</span></p>
+                               </li>
+                           {{/each}}
+                        </ul>
+                        <p><strong>Total price:</strong> <span class="price">{{totalPrice}}</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+{{else}}
+    <p>You are not auth</p>
+    <div class="row">
+        <div class="col 6 s6">
+            <div class="card">
+                <div class="card-content">
+                    <form action="/profile" method="post">
+                        <input type="text" name="name" placeholder="username">
+                        <input type="text" name="password" placeholder="password">
+                        <button type="submit" class="btn">Join +</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/if}}
