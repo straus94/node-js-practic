@@ -1,8 +1,10 @@
 const {Router} = require('express');
 const router = Router();
 const Order = require('../models/order');
+const authMiddleWare = require('../middleware/auth')
 
-router.get('/', async (req, res) => {
+
+router.get('/', authMiddleWare, async (req, res) => {
   try {
     console.log('req -----------> ', req.user._id);
     const orders = await Order.find({'user.userId': req.user._id})
@@ -14,7 +16,6 @@ router.get('/', async (req, res) => {
       isOrder: true,
       title: 'Orders',
       orders: orders.map(o => {
-        console.log('dov -----> ', o._doc);
         return {
           ...o._doc,
           price: o.courses.reduce((total, c) => {
@@ -29,7 +30,7 @@ router.get('/', async (req, res) => {
 
 })
 
-router.post('/', async (req, res) => {
+router.post('/', authMiddleWare, async (req, res) => {
 
   try {
     const user = await req.user.populate('cart.items.courseId').execPopulate()

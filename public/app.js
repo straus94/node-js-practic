@@ -14,8 +14,12 @@ if ($card) {
     $card.addEventListener('click', event => {
         if (event.target.classList.contains('js-remove')) {
             const id = event.target.dataset.id;
+            const csurf = event.target.dataset.csurf
             fetch('/card/remove/' + id, {
-                method: 'delete'
+                method: 'delete',
+                headers: {
+                    'X-XSRF-TOKEN': csurf
+                }
             }).then(res => res.json())
               .then(basket => {
                   if (basket.courses.length) {
@@ -56,3 +60,5 @@ const toDate = date => {
 document.querySelectorAll('.date').forEach(node => {
     node.textContent = toDate(node.textContent)
 })
+
+M.Tabs.init(document.querySelectorAll('.tabs'));

@@ -36,3 +36,16 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.auth {
+    padding: 20px 0 0 0;
+}
+
+.alert {
+    padding: 15px 60px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 14px 0;
+    color: red;
+    background-color: rgba(177, 84, 84, 0.34);
+}
