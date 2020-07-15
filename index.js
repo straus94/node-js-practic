@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 const path = require('path')
+const csurf = require('csurf')
+const flash = require('connect-flash')
 const exphbs = require('express-handlebars')
 const homeRoutes = require('./routes/home')
 const addRoutes = require('./routes/add')
@@ -9,8 +11,7 @@ const cardRoutes = require('./routes/card')
 const ordersRoutes = require('./routes/order')
 const profileRoutes = require('./routes/profile')
 const authRoutes = require('./routes/auth')
-const mongoose = require('mongoose');
-const User = require('./models/user')
+const mongoose = require('mongoose')
 const session = require('express-session')
 const varMiddleWare = require('./middleware/variables')
 const userMiddleWare = require('./middleware/user')
@@ -47,12 +48,14 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({
     extended: true
 }))
-app.use(session(({
+app.use(session({
     secret: 'some secret value',
     resave: false,
     saveUninitialized: false,
     store
-})))
+}))
+app.use(csurf())
+app.use(flash())
 app.use(varMiddleWare)
 app.use(userMiddleWare)
 

@@ -20,6 +20,8 @@
         <span class="helper-text" data-error="enter url image"></span>
     </div>
 
+    <input type="hidden" name="_csrf" value="{{csurf}}">
+
     <input type="hidden" name="id" value="{{course._id}}">
     <button class="btn btn-primary">Edit </button>
 
@@ -28,6 +30,8 @@
 
 <form action="/courses/remove" method="post">
     <input type="hidden" name="id" value="{{course._id}}">
+    <input type="hidden" name="_csrf" value="{{csurf}}">
+
     <button type="submit" class="btn red">Delete </button>
 </form>
 
