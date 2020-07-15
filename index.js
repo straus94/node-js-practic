@@ -16,9 +16,10 @@ const session = require('express-session')
 const varMiddleWare = require('./middleware/variables')
 const userMiddleWare = require('./middleware/user')
 const MongoStore = require('connect-mongodb-session')(session)
+const keys = require('./keys/index')
 
 
-const MONGODB_URI = 'mongodb+srv://den:rfWCPb3HVk4D8i9a@cluster0.1kp6p.mongodb.net/nodeJS'
+// const MONGODB_URI = 'mongodb+srv://den:rfWCPb3HVk4D8i9a@cluster0.1kp6p.mongodb.net/nodeJS'
 const hbs = exphbs.create({
     defaultLayout: 'main',
     extname: 'hbs'
@@ -26,7 +27,7 @@ const hbs = exphbs.create({
 
 const store = new MongoStore({
     collection: 'sessions',
-    uri: MONGODB_URI,
+    uri: keys.MONGODB_URI,
 })
 
 app.engine('hbs', hbs.engine)
@@ -49,7 +50,7 @@ app.use(express.urlencoded({
     extended: true
 }))
 app.use(session({
-    secret: 'some secret value',
+    secret: keys.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store
@@ -74,7 +75,8 @@ const password = 'rfWCPb3HVk4D8i9a'
 async function start() {
     try {
         // const url = 'mongodb+srv://den:rfWCPb3HVk4D8i9a@cluster0.1kp6p.mongodb.net/nodeJS'
-        await mongoose.connect(MONGODB_URI, {
+        console.log(keys.MONGODB_URI);
+        await mongoose.connect(keys.MONGODB_URI, {
                     useNewUrlParser: true,
                     useUnifiedTopology: true,
                     useFindAndModify: false
