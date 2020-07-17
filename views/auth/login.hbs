@@ -13,7 +13,7 @@
             {{/if}}
 
             <h1>Log in</h1> {{loginError}}
-            <form action="/auth/login" method="post">
+            <form action="/auth/login" method="POST">
                 <div class="input-field">
                     <input id="email" type="email" name="email" class="validate" required>
                     <label for="email">email</label>
@@ -27,7 +27,7 @@
                 </div>
 
                 <input type="hidden" name="_csrf" value="{{csurf}}">
-
+                <p><a href="/auth/reset">Forgot password</a></p>
                 <button type="submit" class="btn btn-primary">Log in</button>
             </form>
         </div>
@@ -36,7 +36,7 @@
                 <p class="alert">{{registerError}}</p>
             {{/if}}
             <h1>Registration</h1>
-            <form action="/auth/register" method="post">
+            <form action="/auth/register" method="POST">
                 <div class="input-field">
                     <input id="name" type="text" name="name" class="validate" required>
                     <label for="name">name</label>

@@ -11,6 +11,7 @@ const cardRoutes = require('./routes/card')
 const ordersRoutes = require('./routes/order')
 const profileRoutes = require('./routes/profile')
 const authRoutes = require('./routes/auth')
+// const resetRoutes = require('./routes/auth/reset')
 const mongoose = require('mongoose')
 const session = require('express-session')
 const varMiddleWare = require('./middleware/variables')
@@ -67,6 +68,7 @@ app.use('/card', cardRoutes);
 app.use('/orders', ordersRoutes);
 app.use('/profile', profileRoutes);
 app.use('/auth', authRoutes);
+// app.use('/auth/reset', resetRoutes);
 
 
 const PORT = process.env.PORT || 3000;
